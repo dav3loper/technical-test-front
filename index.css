@@ -1,0 +1,11 @@
+.first-contendant {
+    position: absolute;
+    top: 750px;
+    left: 0;
+}
+
+.second-contendant {
+    position: absolute;
+    top: 1000px;
+    left: 0;
+}

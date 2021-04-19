@@ -14,8 +14,8 @@
 
 <h2>¡Parrilla de salida!</h2>
 <div>
-    <div id="firstContestant" data-name="Jane Doe's car" data-acceleration="0" class="contestant first-contestant"></div>
-    <div id="secondContestant" data-name="John Doe's car" data-acceleration="0" class="contestant second-contestant"></div>
+    <div class="contestant first-contestant" data-name="Jane Doe's car" data-velocity="0" id="firstContestant"></div>
+    <div class="contestant second-contestant" data-name="John Doe's car" data-velocity="0" id="secondContestant"></div>
 </div>
 <button onclick="startCompetition()">¡Empezar!</button>
 <template id="carPill">
@@ -23,7 +23,7 @@
         <div class="id"></div>
         <div class="name"></div>
         <div class="price"></div>
-        <div class="hp"></div>
+        <div class="velocity"></div>
         <img alt="" class="img" src=""/>
     </div>
 </template>

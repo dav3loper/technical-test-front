@@ -38,7 +38,7 @@ function move(element, name, direction, velocity) {
     var movingFrames = setInterval(moveAFrame, 10);
 }
 
-function buildPillCar(id, model, price, horsePower, imgUrl) {
+function buildPillCar(id, model, price, velocity, imgUrl) {
     const carTemplate = document.querySelector('#carPill');
 
     let node = carTemplate.cloneNode(true)
@@ -48,8 +48,8 @@ function buildPillCar(id, model, price, horsePower, imgUrl) {
     nameNode.innerHTML = model;
     let priceNode = node.content.querySelector('.price');
     priceNode.innerHTML = price;
-    let hpNode = node.content.querySelector('.hp');
-    hpNode.innerHTML = horsePower;
+    let velocityNode = node.content.querySelector('.velocity');
+    velocityNode.innerHTML = velocity;
     let imgNode = node.content.querySelector('.img');
     imgNode.src = imgUrl;
 

@@ -25,7 +25,7 @@ function startCompetition(){
         window.scroll(0, 1000)
         const contestants = document.querySelectorAll('.contestant');
         contestants.forEach(function (contestant) {
-            move(contestant, contestant.dataset.name, "right", contestant.dataset.acceleration);
+            move(contestant, contestant.dataset.name, "right", contestant.dataset.velocity);
         })
     }else{
         alert('No están listos los participantes..');
@@ -48,7 +48,7 @@ function setInPosition(element, positionId) {
     imgNode.classList.add('img');
     imgNode.setAttribute('src', imgElement.getAttribute('src'));
     position.dataset.name = element.querySelector('.name').textContent;
-    position.dataset.acceleration = element.querySelector('.hp').textContent;
+    position.dataset.velocity = element.querySelector('.velocity').textContent;
     position.appendChild(imgNode);
 
 }

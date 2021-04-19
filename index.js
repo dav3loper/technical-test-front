@@ -1,37 +1,23 @@
+//refactor del movement para invertir las velocidades q estan al reves :sweat_smile:
+//boton de iniciar carrera cuando los contendant esten listos
 document.addEventListener("DOMContentLoaded", function (event) {
     let carList = [];
 
-    fetch('https://private-anon-0b6991f36b-carsapi1.apiary-mock.com/cars')
-        .then(response => response.json())
-        .then(data => carList = data);
+    buildPillCar("f3ea3d75-d393-4be9-bf7c-0d7b46b5ba2d", "Audi A3", "23000", "100",
+        "https://www.coches.com/fotos_historicas/audi/A3-Sportback/high_178fdb140c96f1c22145cff06ac91d78.jpg");
 
-    setTimeout(function () {
-        const carTemplate = document.querySelector('#carPill');
-        carList.slice(10, 12).forEach(function (car) {
-            let node = carTemplate.cloneNode(true)
-            node.id = car.id;
-            let id = node.content.querySelector('.id');
-            id.innerHTML = car.id;
-            let name = node.content.querySelector('.name');
-            name.innerHTML = car.make + ' ' + car.model;
-            let price = node.content.querySelector('.price');
-            price.innerHTML = car.price;
-            let hp = node.content.querySelector('.hp');
-            hp.innerHTML = car.horsepower;
-            let img = node.content.querySelector('.img');
-            img.src = car.img_url;
+    buildPillCar("d5f701ab-356f-4307-976d-d64e62d78e93", "Lada 2107", "2000", "60",
+        "https://www.coches.com/fotos_historicas/lada/2107-1992/lada_2107-1992_r10.jpg");
 
-            document.querySelector('#carPillList').appendChild(node.content);
+    document.querySelectorAll('.pill').forEach(function (element) {
+        element.addEventListener('click', function (event) {
+            putInCompetition(event.currentTarget);
         })
-        document.querySelectorAll('.pill').forEach(function (element) {
-            element.addEventListener('click', function (event) {
-                putInCompetition(event.currentTarget);
-            })
-        });
-        document.addEventListener('winner', function (event) {
-            console.log("El ganador es: " + event.detail.winner)
-        });
-    }, 1000)
+    });
+
+    document.addEventListener('winner', function (event) {
+        alert("El ganador es: " + event.detail.winner)
+    });
 });
 
 function putInCompetition(element) {
@@ -52,6 +38,7 @@ function setInPosition(element, positionId) {
     const imgElement = element.querySelector('.img');
     let position = document.querySelector(positionId);
     const imgNode = document.createElement('img');
+    imgNode.classList.add('img');
     imgNode.setAttribute('src', imgElement.getAttribute('src'));
     imgNode.dataset.name = element.querySelector('.name').textContent;
     imgNode.dataset.acceleration = element.querySelector('.hp').textContent;

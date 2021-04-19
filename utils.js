@@ -1,6 +1,7 @@
 let winner = null;
-function move(element, direction, distance = 1500, duration = 1000) {
 
+function move(element, name, direction, velocity) {
+    let distance = 1000
     var topOrLeft = (direction === "left" || direction === "right") ? "left" : "top";
     var isNegated = (direction === "up" || direction === "left");
     if (isNegated) {
@@ -9,24 +10,25 @@ function move(element, direction, distance = 1500, duration = 1000) {
     var elStyle = window.getComputedStyle(element);
     var value = elStyle.getPropertyValue(topOrLeft).replace("px", "");
     var destination = Number(value) + distance;
-    var frameDistance = distance / (duration / 10);
+    var frameDistance = velocity * 30 / distance;
 
     function moveAFrame() {
         elStyle = window.getComputedStyle(element);
         value = elStyle.getPropertyValue(topOrLeft).replace("px", "");
         var newLocation = Number(value) + frameDistance;
-        var beyondDestination = ((!isNegated && newLocation >= destination) || (isNegated && newLocation <= destination));
+        var beyondDestination = ((!isNegated && newLocation >= destination)
+            || (isNegated && newLocation <= destination))
+            || winner !== null;
         if (beyondDestination) {
-            let runner = element.querySelector('img');
             if (winner === null) {
-                winner = runner.dataset.name;
+                element.style[topOrLeft] = destination + "px";
+                winner = name;
                 document.dispatchEvent(new CustomEvent('winner', {
-                    detail:{
+                    detail: {
                         winner: winner
                     }
                 }))
             }
-            element.style[topOrLeft] = destination + "px";
             clearInterval(movingFrames);
         } else {
             element.style[topOrLeft] = newLocation + "px";

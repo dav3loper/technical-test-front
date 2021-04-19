@@ -1,5 +1,4 @@
-//boton de iniciar carrera cuando los contestant esten listos
-let everythingIsReady = false;
+let readySetGo = false;
 document.addEventListener("DOMContentLoaded", function (event) {
 
     buildPillCar("f3ea3d75-d393-4be9-bf7c-0d7b46b5ba2d", "Audi A3", "23000", "100",
@@ -22,11 +21,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 function startCompetition(){
-    window.scroll(0, 1000)
-    const contestants = document.querySelectorAll('.contestant');
-    contestants.forEach(function (contestant) {
-        move(contestant, contestant.dataset.name, "right", contestant.dataset.acceleration);
-    })
+    if(readySetGo) {
+        window.scroll(0, 1000)
+        const contestants = document.querySelectorAll('.contestant');
+        contestants.forEach(function (contestant) {
+            move(contestant, contestant.dataset.name, "right", contestant.dataset.acceleration);
+        })
+    }else{
+        alert('No están listos los participantes..');
+    }
 }
 
 function putInCompetition(element) {
@@ -34,7 +37,7 @@ function putInCompetition(element) {
         setInPosition(element, '#firstContestant');
     } else if (document.querySelector('#secondContestant').firstChild === null) {
         setInPosition(element, '#secondContestant');
-        startCompetition();
+        readySetGo = true;
     }
 }
 

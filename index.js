@@ -42,7 +42,8 @@ function putInCompetition(element) {
         const contendants = document.querySelectorAll('.contendant');
         window.scroll(0, 1000)
         contendants.forEach(function (contendant) {
-            move(contendant, "right", contendant.dataset.acceleration);
+            const imgElement = contendant.querySelector('img');
+            move(contendant, "right", 1500, imgElement.dataset.acceleration);
         })
     }
 }
